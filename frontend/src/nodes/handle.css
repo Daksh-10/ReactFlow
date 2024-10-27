@@ -1,0 +1,27 @@
+.react-flow__handle-right{
+    margin-right:-15px;
+    width:0.5vw;
+    background-color: rgba(131, 10, 237, 0.6);
+    height:0.5vw;
+}
+.react-flow__handle-left{
+    margin-left:-15px;
+    width:0.5vw;
+    background-color: rgba(131, 10, 237);
+    height:0.5vw;
+}
+.react-flow__handle-top{
+    margin-top:-15px;
+    width:0.5vw;
+    height:0.5vw;
+    background-color: rgba(131, 10, 237, 0.6);
+}
+.react-flow__handle-bottom{
+    margin-bottom:-15px;
+    width:0.5vw;
+    height:0.5vw;
+    background-color: rgba(131, 10, 237, 0.6);
+}
+
+
+
