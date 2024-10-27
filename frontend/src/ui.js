@@ -34,7 +34,7 @@ const selector = (state) => ({
   onConnect: state.onConnect,
 });
 
-export const PipelineUI = () => {
+export const PipelineUI = ({Vertices, setVertices, Connections, setConnections}) => {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const {
@@ -53,8 +53,12 @@ export const PipelineUI = () => {
   };
 
   useEffect(() => {
-    console.log("Nodes: ", nodes);
-    console.log("Edges: ", edges);
+    const newVertices = nodes.map((item)=>(item.id));
+    setVertices(newVertices);
+
+    const newEdges = edges.map((item)=>{return {source: item.source, target: item.target}});
+    setConnections(newEdges);
+    // console.log(newVertices, newEdges);
   }, [nodes, edges]);
   const onDrop = useCallback(
     (event) => {

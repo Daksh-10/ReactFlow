@@ -1,20 +1,34 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict
 from collections import defaultdict
 
 app = FastAPI()
 
+# Define allowed origins (here, allow requests from localhost:3000)
+origins = [
+    "http://localhost:3000",  # React frontend
+]
+
+# Apply CORS middleware to the app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,           # Allow specified origins
+    allow_credentials=True,
+    allow_methods=["*"],             # Allow all HTTP methods
+    allow_headers=["*"],             # Allow all headers
+)
+
 # Define the Pydantic models for request body validation
-class Node(BaseModel):
-    id: str
+
 
 class Edge(BaseModel):
     source: str
     target: str
 
 class GraphRequest(BaseModel):
-    nodes: List[Node]
+    nodes: List[str]
     edges: List[Edge]
 
 def is_dag(nodes, edges):
@@ -49,15 +63,14 @@ def is_dag(nodes, edges):
 
     # Check each node; the graph might be disconnected
     for node in nodes:
-        node_id = node['id']
-        if node_id not in visited:
-            if has_cycle(node_id):
+        if node not in visited:
+            if has_cycle(node):
                 return False  # Graph has a cycle, so it's not a DAG
 
     return True  # No cycles found, so it is a DAG
-@app.get('/pipelines/parse')
-def parse_pipeline(graph_request: GraphRequest):
-    nodes = [{"id": node.id} for node in graph_request.nodes]
+@app.post('/pipelines/parse')
+async def parse_pipeline(graph_request: GraphRequest):
+    nodes = [node for node in graph_request.nodes]
     edges = [{"source": edge.source, "target": edge.target} for edge in graph_request.edges]
 
     # Calculate the number of nodes and edges

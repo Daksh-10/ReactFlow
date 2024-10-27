@@ -59,8 +59,7 @@ function CustomNode({ id, data }) {
       idType,
     };
     setItems([...items, newItem]);
-    console.log(items);
-    // Clear input fields
+    // console.log(items);
 
     setShowFields(false);
     updateNodeInternals(id);
