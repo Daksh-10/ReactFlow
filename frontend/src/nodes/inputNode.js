@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Handle, Position } from "reactflow";
 import "./styles/styles.css";
-import "./handle.css";
+import "./styles/handle.css";
 
 export const InputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(

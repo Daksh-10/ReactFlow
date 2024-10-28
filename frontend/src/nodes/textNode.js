@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { Handle, Position } from "reactflow";
 import "./styles/styles.css";
-import "./handle.css";
+import "./styles/handle.css";
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || "{{input}}");
@@ -13,6 +13,11 @@ export const TextNode = ({ id, data }) => {
     const textField = textFieldRef.current;
     textField.style.height = "auto";
     textField.style.height = `${textField.scrollHeight}px`;
+  };
+
+  const extractInput = () => {
+    const match = currText.match(/{{(.*?)}}/);
+    return match ? match[1].trim() : ''; 
   };
 
   return (
@@ -31,7 +36,7 @@ export const TextNode = ({ id, data }) => {
           />
         </label>
       </div>
-
+      <div className="variable"> {extractInput() ? extractInput() : ' '}</div>
       <Handle type="source" position={Position.Right} id={`${id}-output`} />
     </div>
   );

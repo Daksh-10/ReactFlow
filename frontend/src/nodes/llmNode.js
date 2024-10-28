@@ -2,7 +2,7 @@
 
 import { Handle, Position } from "reactflow";
 import "./styles/styles.css";
-import "./handle.css";
+import "./styles/handle.css";
 
 export const LLMNode = ({ id, data }) => {
   return (

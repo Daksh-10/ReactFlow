@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/styles.css";
-import "./handle.css";
+import "./styles/handle.css";
 import { useState } from "react";
 import { Handle, useUpdateNodeInternals } from "reactflow";
 function CustomNode({ id, data }) {
@@ -108,9 +108,7 @@ function CustomNode({ id, data }) {
             <option value="Add">AddOption</option>
           </select>
         </label>
-        <button className="button" onClick={handleAddClick}>
-          {showFields ? "Cancel" : "Add Handles"}
-        </button>
+        
         {toggleOption ? (
           <input
             className="textField"
@@ -123,7 +121,9 @@ function CustomNode({ id, data }) {
           />
         ) : undefined}
       </div>
-
+      <button className="button" onClick={handleAddClick}>
+          {showFields ? "Cancel" : "Add Handles"}
+        </button>
       {showFields && (
         <form className="form" onSubmit={handleSubmit}>
           <div className="label">

@@ -8,7 +8,7 @@ app = FastAPI()
 
 # Define allowed origins (here, allow requests from localhost:3000)
 origins = [
-    "http://localhost:3000",  # React frontend
+    "http://localhost:3000", 
 ]
 
 # Apply CORS middleware to the app
@@ -21,7 +21,6 @@ app.add_middleware(
 )
 
 # Define the Pydantic models for request body validation
-
 
 class Edge(BaseModel):
     source: str
@@ -37,37 +36,31 @@ def is_dag(nodes, edges):
     for edge in edges:
         graph[edge['source']].append(edge['target'])
     
-    # Initialize visited and recursion stack sets
+    # visited and recursion stack sets
     visited = set()
     rec_stack = set()
 
     # Define recursive function to detect cycle using DFS
     def has_cycle(v):
-        # Mark the current node as visited and add to recursion stack
         visited.add(v)
         rec_stack.add(v)
         
-        # Recur for all vertices adjacent to this vertex
         for neighbor in graph[v]:
-            # If the neighbor is in the recursion stack, we found a cycle
             if neighbor in rec_stack:
                 return True
-            # If the neighbor hasn't been visited, recur for it
             if neighbor not in visited:
                 if has_cycle(neighbor):
                     return True
 
-        # Remove the vertex from recursion stack and return False
         rec_stack.remove(v)
         return False
 
-    # Check each node; the graph might be disconnected
     for node in nodes:
         if node not in visited:
             if has_cycle(node):
-                return False  # Graph has a cycle, so it's not a DAG
+                return False 
 
-    return True  # No cycles found, so it is a DAG
+    return True  
 @app.post('/pipelines/parse')
 async def parse_pipeline(graph_request: GraphRequest):
     nodes = [node for node in graph_request.nodes]

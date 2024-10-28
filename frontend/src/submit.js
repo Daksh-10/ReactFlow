@@ -1,7 +1,10 @@
 // submit.js
-
+import "./styles/submit.css";
 import { useEffect } from "react";
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import {Alert} from "./alert.js";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const SubmitButton = ({Vertices, Connections}) => {
 
@@ -15,8 +18,8 @@ export const SubmitButton = ({Vertices, Connections}) => {
               nodes: Vertices,
               edges: Connections,
             });
-            alert(response.data);
-            console.log(response.data);
+            toast.success(<Alert nodes={response.data.num_nodes} edges={response.data.num_edges} isDag={response.data.is_dag}/>);
+            
           } 
         catch(error){
             console.error('Error submitting graph:', error);
@@ -26,7 +29,8 @@ export const SubmitButton = ({Vertices, Connections}) => {
 
     return (
         <div onClick={handleSubmit} style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <button type="submit">Submit</button>
+            <button className="submit" type="submit">Submit</button>
+            <ToastContainer position="top-center"  />
         </div>
     );
 }
