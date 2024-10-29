@@ -8,7 +8,6 @@ app = FastAPI()
 
 # Define allowed origins (here, allow requests from localhost:3000)
 origins = [
-    "http://localhost:3000", 
     "https://react-flow-zr4j.vercel.app/""
 ]
 
