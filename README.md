@@ -16,5 +16,3 @@ You can use pycharm to create the virtual environment or follow the below steps.
 6. pip install "fastapi[standard]"
 7. pip install uvicorn
 8. uvicorn main:app --reload (to start the server)
-
-I'll deploy the project soon :)
