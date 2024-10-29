@@ -8,7 +8,7 @@ app = FastAPI()
 
 # Define allowed origins (here, allow requests from localhost:3000)
 origins = [
-    "https://react-flow-zr4j.vercel.app/""
+    "https://react-flow-zr4j.vercel.app/"
 ]
 
 # Apply CORS middleware to the app
